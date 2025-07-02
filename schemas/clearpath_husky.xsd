@@ -70,22 +70,22 @@
     <!-- Complex type for moveToGPSLocationType -->
     <xs:complexType name="moveToGPSLocationType">
         <xs:sequence>
-            <xs:element name="Latitude" type="xs:decimal"/>
-            <xs:element name="Longitude" type="xs:decimal"/>
-            <xs:element name="Reward" type="xs:decimal" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="latitude" type="xs:decimal"/>
+            <xs:element name="longitude" type="xs:decimal"/>
+            <xs:element name="reward" type="xs:decimal" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
     </xs:complexType>
 
     <!-- Complex type for moveToRelativeLocationType -->
     <xs:complexType name="moveToRelativeLocationType">
         <xs:sequence>
-            <xs:element name="X" type="xs:decimal"/>
-            <xs:element name="Y" type="xs:decimal"/>
+            <xs:element name="x" type="xs:decimal"/>
+            <xs:element name="y" type="xs:decimal"/>
             <!-- No Z since it's moving in 2D -->
-            <xs:element name="Roll" type="xs:decimal"/>
-            <xs:element name="Pitch" type="xs:decimal"/>
-            <xs:element name="Yaw" type="xs:decimal"/>
-            <xs:element name="Reward" type="xs:decimal" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="roll" type="xs:decimal"/>
+            <xs:element name="pitch" type="xs:decimal"/>
+            <xs:element name="yaw" type="xs:decimal"/>
+            <xs:element name="reward" type="xs:decimal" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
     </xs:complexType>
 
