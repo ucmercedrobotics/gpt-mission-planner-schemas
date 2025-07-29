@@ -81,10 +81,10 @@
             <xs:element name="x" type="xs:decimal"/>
             <xs:element name="y" type="xs:decimal"/>
             <!-- No Z since it's moving in 2D -->
+            <!-- roll, pitch, and yaw are represented in radians here -->
             <xs:element name="roll" type="xs:decimal"/>
             <xs:element name="pitch" type="xs:decimal"/>
             <xs:element name="yaw" type="xs:decimal"/>
-            <xs:element name="reward" type="xs:decimal" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
     </xs:complexType>
 
