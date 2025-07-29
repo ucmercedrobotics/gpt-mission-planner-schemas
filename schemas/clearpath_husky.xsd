@@ -78,6 +78,7 @@
     <!-- Complex type for moveToRelativeLocationType -->
     <xs:complexType name="moveToRelativeLocationType">
         <xs:sequence>
+            <!-- note that X is forward and y is lateral movement for the robot -->
             <xs:element name="x" type="xs:decimal"/>
             <xs:element name="y" type="xs:decimal"/>
             <!-- No Z since it's moving in 2D -->
