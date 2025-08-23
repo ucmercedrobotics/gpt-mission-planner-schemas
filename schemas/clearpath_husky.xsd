@@ -69,8 +69,15 @@
     <!-- Complex type for moveToGPSLocationType -->
     <xs:complexType name="moveToGPSLocationType">
         <xs:sequence>
-            <xs:element name="latitude" type="xs:decimal"/>
-            <xs:element name="longitude" type="xs:decimal"/>
+            <!-- <xs:element name="latitude" type="xs:decimal"/>
+            <xs:element name="longitude" type="xs:decimal"/> -->
+            <xs:choice>
+                <xs:element name="id" type="xs:integer"/>
+                <xs:sequence>
+                    <xs:element name="latitude" type="xs:decimal"/>
+                    <xs:element name="longitude" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:choice>
             <xs:element name="reward" type="xs:decimal" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
     </xs:complexType>
