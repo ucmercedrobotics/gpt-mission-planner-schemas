@@ -180,7 +180,7 @@
                         <xs:element name="TaskID" type="xs:string"/>
                         <xs:element name="TaskDescription" type="xs:string"/>
                         <xs:element name="StateVariables" type="StateVariablesType" minOccurs="0"/>
-                        <xs:element name="Action" type="robotActions" minOccurs="1" maxOccurs="1"/>
+                        <xs:element name="Action" type="robotActions" />
                         <xs:element name="Preconditions" type="PreconditionsType" minOccurs="0"/>
                     </xs:sequence>
                 </xs:complexType>
@@ -192,8 +192,8 @@
      <!-- TODO: update this to incorporate the precondition type, maybe, or add a new type for conditionals -->
     <xs:complexType name="ConditionalType">
         <xs:sequence>
-            <xs:element name="Comparator" type="comparisonType" minOccurs="1" maxOccurs="1"/>
-            <xs:choice minOccurs="1" maxOccurs="1">
+            <xs:element name="Comparator" type="comparisonType" />
+            <xs:choice >
                 <xs:element name="HardValue" type="xs:double"/>
             </xs:choice>
         </xs:sequence>
@@ -203,7 +203,19 @@
     <xs:complexType name="ConditionalActionsType">
         <xs:sequence>
             <xs:element name="Conditional" type="ConditionalType" minOccurs="1" maxOccurs="unbounded"/>
-            <xs:element name="Sequence" type="ConditionalSequenceType" minOccurs="1" maxOccurs="1"/>
+            <xs:choice>
+                <xs:element name="Break"/>
+                <xs:element name="Sequence" type="ConditionalSequenceType" />
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Loop type -->
+    <xs:complexType name="LoopType">
+        <xs:sequence>
+            <!-- 0 in Loop Count represents indefinite looping -->
+            <xs:element name="LoopCount" type="xs:integer" />
+            <xs:element name="Sequence" type="ConditionalSequenceType" />
         </xs:sequence>
     </xs:complexType>
 
@@ -212,6 +224,7 @@
         <xs:sequence>
             <xs:choice maxOccurs="unbounded">
                 <xs:element name="TaskID" type="xs:string"/>
+                <xs:element name="Loop" type="LoopType" minOccurs="0" maxOccurs="1"/>
                 <xs:element name="ConditionalActions" type="ConditionalActionsType" minOccurs="0" maxOccurs="2"/>
             </xs:choice>
         </xs:sequence>
