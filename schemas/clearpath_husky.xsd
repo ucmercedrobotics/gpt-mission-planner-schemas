@@ -31,6 +31,10 @@
             <xs:enumeration value="takeCO2Reading"/>
             <xs:enumeration value="moveToGPSLocation"/>
             <xs:enumeration value="moveToRelativeLocation"/>
+            <xs:enumeration value="orientRobotHeading"/>
+            <xs:enumeration value="activateSeeder"/>
+            <xs:enumeration value="deactivateSeeder"/>
+            <xs:enumeration value="selectSeed"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -44,6 +48,41 @@
             <xs:enumeration value="neq"/>
         </xs:restriction>
     </xs:simpleType>
+
+    <!-- Complex type for selectSeedType -->
+    <xs:complexType name="selectSeedType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="chineseBittermelon"/>
+                <xs:element name="indianBittermelon"/>
+                <xs:element name="longBean"/>
+                <xs:element name="pumpkin"/>
+                <xs:element name="squash"/>
+                <xs:element name="tomato"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Complex type for plantSeed -->
+    <xs:complexType name="activateSeederType">
+        <xs:sequence>
+            <!-- activate true turns on seeder and lowers implement -->
+            <xs:element name="activate" type="xs:boolean"/>
+            <!-- depth represented in millimeters -->
+            <xs:element name="depth" type="xs:decimal"/>
+            <!-- spacing between each set of seeds planted in meters -->
+            <xs:element name="seedSpacing" type="xs:decimal"/>
+            <xs:element name="numberOfSeedsPerPlant" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Complex type for deactivateSeederType -->
+    <xs:complexType name="deactivateSeederType">
+        <xs:sequence>
+            <!-- deactivate true turns off seeder and lifts implement -->
+            <xs:element name="deactivate" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
 
     <!-- Complex type for takeThermalPicture -->
     <xs:complexType name="takeThermalPictureType">
@@ -69,8 +108,6 @@
     <!-- Complex type for moveToGPSLocationType -->
     <xs:complexType name="moveToGPSLocationType">
         <xs:sequence>
-            <!-- <xs:element name="latitude" type="xs:decimal"/>
-            <xs:element name="longitude" type="xs:decimal"/> -->
             <xs:choice>
                 <xs:element name="id" type="xs:integer"/>
                 <xs:sequence>
@@ -85,16 +122,22 @@
     <!-- Complex type for moveToRelativeLocationType -->
     <xs:complexType name="moveToRelativeLocationType">
         <xs:sequence>
-            <!-- note that X is forward and y is lateral movement for the robot -->
+            <!-- relative to current robot position -->
+            <!-- positive X is forward, negative X is backward -->
             <xs:element name="x" type="xs:decimal"/>
-            <xs:element name="y" type="xs:decimal"/>
-            <!-- No Z since it's moving in 2D -->
-            <!-- roll, pitch, and yaw are represented in radians here -->
-            <xs:element name="roll" type="xs:decimal"/>
-            <xs:element name="pitch" type="xs:decimal"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Complex type for orientRobotHeadingType -->
+    <xs:complexType name="orientRobotHeadingType">
+        <xs:sequence>
+            <!-- absolute means turning using cardinal directions: set True -->
+            <!-- relative means turning using the robot's local body frame: set False -->
+            <xs:element name="absolute" type="xs:boolean"/>
             <xs:element name="yaw" type="xs:decimal"/>
         </xs:sequence>
     </xs:complexType>
+
 
     <!-- Complex type for robotActions -->
     <xs:complexType name="robotActions">
@@ -106,6 +149,10 @@
                 <xs:element name="takeCO2Reading" type="takeCO2ReadingType"/>
                 <xs:element name="moveToGPSLocation" type="moveToGPSLocationType"/>
                 <xs:element name="moveToRelativeLocation" type="moveToRelativeLocationType"/>
+                <xs:element name="orientRobotHeading" type="orientRobotHeadingType"/>
+                <xs:element name="activateSeeder" type="activateSeederType"/>
+                <xs:element name="deactivateSeeder" type="deactivateSeederType"/>
+                <xs:element name="selectSeed" type="selectSeedType"/>
             </xs:choice>
         </xs:sequence>
     </xs:complexType>
