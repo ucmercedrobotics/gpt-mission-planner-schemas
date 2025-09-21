@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+
+  <!-- Root element -->
+  <xs:element name="root">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="BehaviorTree" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="BTCPP_format" type="xs:integer" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Control nodes -->
+  <xs:element name="Sequence" type="BTNodeType"/>
+  <xs:element name="Fallback" type="BTNodeType"/>
+  <xs:element name="Parallel" type="BTNodeType"/>
+  <xs:element name="Repeat" type="BTNodeType"/>
+
+  <!-- BehaviorTree definition -->
+  <xs:element name="BehaviorTree">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element ref="Sequence"/>
+      </xs:choice>
+      <xs:attribute name="ID" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Generic node type -->
+  <xs:complexType name="BTNodeType">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element ref="Sequence"/>
+      <xs:element ref="Fallback"/>
+      <xs:element ref="Parallel"/>
+      <!-- All robot actions -->
+      <xs:element name="moveToGPSLocation" type="moveToGPSLocationType"/>
+      <xs:element name="moveToRelativeLocation" type="moveToRelativeLocationType"/>
+      <xs:element name="orientRobotHeading" type="orientRobotHeadingType"/>
+    </xs:choice>
+  </xs:complexType>
+
+  <!-- Leaf node types with attributes -->
+  <!-- moveToGPSLocation -->
+  <xs:complexType name="moveToGPSLocationType">
+    <xs:attribute name="id" type="xs:integer"/>
+    <xs:attribute name="latitude" type="xs:decimal"/>
+    <xs:attribute name="longitude" type="xs:decimal"/>
+    <xs:attribute name="reward" type="xs:decimal"/>
+  </xs:complexType>
+
+  <!-- moveToRelativeLocation -->
+  <xs:complexType name="moveToRelativeLocationType">
+    <xs:attribute name="x" type="xs:decimal" use="required"/>
+  </xs:complexType>
+
+  <!-- orientRobotHeading -->
+  <xs:complexType name="orientRobotHeadingType">
+    <xs:attribute name="absolute" type="xs:boolean" use="required"/>
+    <xs:attribute name="yaw" type="xs:decimal" use="required"/>
+  </xs:complexType>
+
+</xs:schema>
