@@ -45,6 +45,8 @@
             <!-- Condition nodes -->
             <xs:element name="ValueCondition" type="valueConditionType" />
             <xs:element name="BoolCondition" type="boolConditionType" />
+            <!-- AlwaysSuccess used for Fallback to ensure even if condition fails, mission might want to proceed -->
+            <xs:element name="AlwaysSuccess" />
         </xs:choice>
     </xs:complexType>
 
