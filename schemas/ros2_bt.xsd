@@ -51,14 +51,14 @@
     <!-- Leaf node types with attributes -->
     <!-- moveToTreeID -->
     <xs:complexType name="moveToTreeIDType">
-        <xs:attribute name="name" type="xs:string" use="required" />
+        <xs:attribute name="name" type="taskNameType" use="required" />
         <xs:attribute name="action_name" type="actionServerEnumType" use="required" />
         <xs:attribute name="id" type="xs:integer" use="required" />
     </xs:complexType>
 
     <!-- moveToGPSLocation -->
     <xs:complexType name="moveToGPSLocationType">
-        <xs:attribute name="name" type="xs:string" use="required" />
+        <xs:attribute name="name" type="taskNameType" use="required" />
         <xs:attribute name="action_name" type="actionServerEnumType" use="required" />
         <xs:attribute name="latitude" type="xs:decimal" use="required" />
         <xs:attribute name="longitude" type="xs:decimal" use="required" />
@@ -66,14 +66,14 @@
 
     <!-- moveToRelativeLocation -->
     <xs:complexType name="moveToRelativeLocationType">
-        <xs:attribute name="name" type="xs:string" use="required" />
+        <xs:attribute name="name" type="taskNameType" use="required" />
         <xs:attribute name="action_name" type="actionServerEnumType" use="required" />
         <xs:attribute name="x" type="xs:decimal" use="required" />
     </xs:complexType>
 
     <!-- orientRobotHeading -->
     <xs:complexType name="orientRobotHeadingType">
-        <xs:attribute name="name" type="xs:string" use="required" />
+        <xs:attribute name="name" type="taskNameType" use="required" />
         <xs:attribute name="action_name" type="actionServerEnumType" use="required" />
         <xs:attribute name="absolute" type="xs:boolean" use="required" />
         <xs:attribute name="yaw" type="xs:decimal" use="required" />
@@ -81,7 +81,7 @@
 
     <!-- detectObject -->
     <xs:complexType name="detectObjectType">
-        <xs:attribute name="name" type="xs:string" use="required" />
+        <xs:attribute name="name" type="taskNameType" use="required" />
         <xs:attribute name="action_name" type="actionServerEnumType" use="required" />
         <xs:attribute name="object" type="xs:string" use="required" />
         <xs:attribute name="detected" type="blackboardValueType" use="required" />
@@ -125,6 +125,12 @@
     <xs:simpleType name="blackboardValueType">
         <xs:restriction base="xs:string">
             <xs:pattern value="\{[A-Za-z0-9_]+\}" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="taskNameType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Za-z0-9_]+" />
         </xs:restriction>
     </xs:simpleType>
 
