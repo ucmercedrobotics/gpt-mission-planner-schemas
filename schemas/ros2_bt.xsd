@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="qualified">
+
+    <!-- Root element -->
+    <xs:element name="root">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Mission" type="xs:string" minOccurs="1" />
+                <xs:element ref="BehaviorTree" maxOccurs="unbounded" />
+            </xs:sequence>
+            <xs:attribute name="BTCPP_format" type="xs:integer" use="required" />
+            <xs:attribute name="schema_location" type="xs:string" use="required" />
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Control nodes -->
+    <xs:element name="Sequence" type="BTNodeType" />
+    <xs:element name="Fallback" type="FallbackType" />
+    <xs:element name="Parallel" type="BTNodeType" />
+    <xs:element name="Inverter" type="BTNodeType" />
+    <xs:element name="Repeat" type="BTNodeType" />
+
+    <!-- BehaviorTree definition -->
+    <xs:element name="BehaviorTree">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Sequence" />
+            </xs:sequence>
+            <xs:attribute name="ID" type="xs:string" use="required" />
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Control flow nodes -->
+    <xs:group name="ControlFlowGroup">
+        <xs:choice>
+            <xs:element ref="Sequence" />
+            <xs:element ref="Fallback" />
+            <xs:element ref="Parallel" />
+            <xs:element ref="Inverter" />
+            <xs:element ref="Repeat" />
+        </xs:choice>
+    </xs:group>
+
+    <!-- Robot actions -->
+    <xs:group name="ActionGroup">
+        <xs:choice>
+            <xs:element name="MoveToTreeID" type="moveToTreeIDType" />
+            <xs:element name="MoveToGPSLocation" type="moveToGPSLocationType" />
+            <xs:element name="MoveToRelativeLocation" type="moveToRelativeLocationType" />
+            <xs:element name="OrientRobotHeading" type="orientRobotHeadingType" />
+            <xs:element name="TakeAmbientTemperature" type="takeAmbientTemperatureType" />
+            <xs:element name="DetectObject" type="detectObjectType" />
+        </xs:choice>
+    </xs:group>
+
+    <!-- Conditions -->
+    <xs:group name="ConditionGroup">
+        <xs:choice>
+            <xs:element name="CheckValue" type="checkValueType" />
+            <xs:element name="AssertTrue" type="assertTrueType" />
+        </xs:choice>
+    </xs:group>
+
+    <!-- Decorators -->
+    <xs:group name="DecoratorGroup">
+        <xs:choice>
+            <xs:element name="AlwaysSuccess" />
+        </xs:choice>
+    </xs:group>
+
+    <!-- BTNodeType: control + actions only -->
+    <xs:complexType name="BTNodeType">
+        <xs:sequence>
+            <xs:group ref="ConditionGroup" minOccurs="0" />
+            <xs:choice maxOccurs="unbounded" minOccurs="1">
+                <xs:group ref="ActionGroup" />
+                <xs:group ref="ControlFlowGroup" />
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- FallbackType: sequence then decorators -->
+    <xs:complexType name="FallbackType">
+        <xs:sequence>
+            <xs:element ref="Sequence" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:group ref="DecoratorGroup" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <!-- Leaf node types with attributes -->
+    <!-- moveToTreeID -->
+    <xs:complexType name="moveToTreeIDType">
+        <xs:attribute name="name" type="taskNameType" use="required" />
+        <xs:attribute name="action_name" type="xs:string" use="required"
+            fixed="follow_gps_waypoints" />
+        <xs:attribute name="id" type="xs:integer" use="required" />
+    </xs:complexType>
+
+    <!-- moveToGPSLocation -->
+    <xs:complexType name="moveToGPSLocationType">
+        <xs:attribute name="name" type="taskNameType" use="required" />
+        <xs:attribute name="action_name" type="xs:string" use="required"
+            fixed="follow_gps_waypoints" />
+        <xs:attribute name="latitude" type="xs:decimal" use="required" />
+        <xs:attribute name="longitude" type="xs:decimal" use="required" />
+    </xs:complexType>
+
+    <!-- moveToRelativeLocation -->
+    <xs:complexType name="moveToRelativeLocationType">
+        <xs:attribute name="name" type="taskNameType" use="required" />
+        <xs:attribute name="action_name" type="xs:string" use="required"
+            fixed="follow_gps_waypoints" />
+        <xs:attribute name="x" type="xs:decimal" use="required" />
+    </xs:complexType>
+
+    <!-- orientRobotHeading -->
+    <xs:complexType name="orientRobotHeadingType">
+        <xs:attribute name="name" type="taskNameType" use="required" />
+        <xs:attribute name="action_name" type="xs:string" use="required"
+            fixed="follow_gps_waypoints" />
+        <xs:attribute name="absolute" type="xs:boolean" use="required" />
+        <xs:attribute name="yaw" type="xs:decimal" use="required" />
+    </xs:complexType>
+
+    <!-- detectObject -->
+    <xs:complexType name="detectObjectType">
+        <xs:attribute name="name" type="taskNameType" use="required" />
+        <xs:attribute name="action_name" type="xs:string" use="required" fixed="detect_object" />
+        <xs:attribute name="object" type="xs:string" use="required" />
+        <xs:attribute name="detected" type="blackboardValueType" use="required" />
+    </xs:complexType>
+
+    <!-- takeAmbientTemperature -->
+    <xs:complexType name="takeAmbientTemperatureType">
+        <xs:attribute name="name" type="taskNameType" use="required" />
+        <xs:attribute name="action_name" type="xs:string" use="required"
+            fixed="take_ambient_temperature" />
+        <xs:attribute name="temperature" type="blackboardValueType" use="required" />
+    </xs:complexType>
+
+    <!-- Condition nodes -->
+    <!-- checkValue -->
+    <xs:complexType name="checkValueType">
+        <xs:attribute name="comp" type="comparisonType" use="required" />
+        <xs:attribute name="value" type="blackboardValueType" use="required" />
+        <xs:attribute name="threshold" type="xs:decimal" use="required" />
+    </xs:complexType>
+
+    <!-- AssertTrue -->
+    <!-- Assumed to be true -->
+    <xs:complexType name="assertTrueType">
+        <xs:attribute name="result" type="blackboardValueType" use="required" />
+    </xs:complexType>
+
+    <!-- Comparison types for ValueCondition -->
+    <xs:simpleType name="comparisonType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="lt" />
+            <xs:enumeration value="lte" />
+            <xs:enumeration value="gt" />
+            <xs:enumeration value="gte" />
+            <xs:enumeration value="eq" />
+            <xs:enumeration value="neq" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="blackboardValueType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\{[A-Za-z0-9_]+\}" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="taskNameType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Za-z0-9_]+" />
+        </xs:restriction>
+    </xs:simpleType>
+
+
+</xs:schema>
