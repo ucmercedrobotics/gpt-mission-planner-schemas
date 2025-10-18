@@ -111,15 +111,17 @@
     <xs:complexType name="moveToRelativeLocationType">
         <xs:attribute name="name" type="taskNameType" use="required" />
         <xs:attribute name="action_name" type="xs:string" use="required"
-            fixed="follow_gps_waypoints" />
+            fixed="navigate_to_pose" />
         <xs:attribute name="x" type="xs:decimal" use="required" />
+        <xs:attribute name="y" type="xs:decimal" use="required" />
     </xs:complexType>
 
     <!-- orientRobotHeading -->
     <xs:complexType name="orientRobotHeadingType">
         <xs:attribute name="name" type="taskNameType" use="required" />
         <xs:attribute name="action_name" type="xs:string" use="required"
-            fixed="follow_gps_waypoints" />
+            fixed="navigate_to_pose" />
+        <!-- True means absolute (NSEW) positioning, false means relative (left - right) positioning -->
         <xs:attribute name="absolute" type="xs:boolean" use="required" />
         <xs:attribute name="yaw" type="xs:decimal" use="required" />
     </xs:complexType>
