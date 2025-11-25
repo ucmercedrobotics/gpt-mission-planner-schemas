@@ -137,7 +137,9 @@
     <!-- sampleLeaf -->
     <xs:complexType name="sampleLeafType">
         <xs:attribute name="name" type="taskNameType" use="required" />
-        <xs:attribute name="action_name" type="xs:string" use="required" fixed="sample_leaf" />
+        <xs:attribute name="action_name" type="xs:string" use="required" fixed="navigate_via_lidar" />
+        <xs:attribute name="latitude" type="xs:decimal" use="optional" />
+        <xs:attribute name="longitude" type="xs:decimal" use="optional" />
     </xs:complexType>
 
     <!-- Condition nodes -->
