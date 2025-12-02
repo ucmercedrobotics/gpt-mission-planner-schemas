@@ -17,8 +17,6 @@
                 <xs:element name="Preconditions" type="PreconditionsType" minOccurs="0"/>
                 <xs:element name="AtomicTasks" type="AtomicTasksType"/>
                 <xs:element name="ActionSequence" type="ActionSequenceType"/>
-                <xs:element name="Outcome" type="OutcomeType" minOccurs="0"/>
-                <xs:element name="Exits" type="ExitsType" minOccurs="0"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -283,38 +281,5 @@
             <xs:element name="Sequence" type="ConditionalSequenceType" minOccurs="1" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
-
-    <!-- TODO: unused for now are the below complexTypes. -->
-
-    <!-- Complex type for Outcome -->
-    <xs:complexType name="OutcomeType">
-        <xs:sequence>
-            <xs:element name="State" type="stateTypes" maxOccurs="unbounded"/>
-        </xs:sequence>
-    </xs:complexType>
-
-    <!-- Simple type for exit types -->
-    <xs:simpleType name="exitTypes">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="nominal"/>
-            <xs:enumeration value="faulted"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <!-- Complex type for Exits -->
-    <xs:complexType name="ExitsType">
-        <xs:sequence>
-            <xs:element name="Exit" maxOccurs="unbounded">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="Type" type="exitTypes"/>
-                        <!-- Something else to describe exit case -->
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-        </xs:sequence>
-    </xs:complexType>
-
-    <!-- TODO: really unused for now are the above complexTypes. -->
 
 </xs:schema>
