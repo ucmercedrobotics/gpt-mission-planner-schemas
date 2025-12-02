@@ -125,6 +125,7 @@
             <!-- relative to current robot position -->
             <!-- positive X is forward, negative X is backward -->
             <xs:element name="x" type="xs:decimal"/>
+            <xs:element name="y" type="xs:decimal"/>
         </xs:sequence>
     </xs:complexType>
 
