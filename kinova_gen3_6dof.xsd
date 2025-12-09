@@ -114,19 +114,16 @@
             fixed="/detect_object" />
         <xs:attribute name="objectName" type="xs:string" use="required" />
         <xs:attribute name="objectColor" type="xs:string" use="optional" />
-        <!-- distance to place the gripper from object in meters, default distance is set to be 0.75m. -->
+        <!-- distance to place the gripper from object in meters, default distance is set to be 0.05m. -->
         <xs:attribute name="objectDistance" type="xs:float" use="optional" />
     </xs:complexType>
 
     <!-- Simple type for end effector movement types -->
     <xs:simpleType name="movementType">
         <xs:restriction base="xs:string">
-            <!-- relative movement defined by movement from end effector current position -->
-            <!-- NOTE: +X is left, -X is right, +Y is up, -Y is down, +Z is forward, -Z is backward -->
             <xs:enumeration value="end_effector_link"/>
-            <!-- absolute movement defined by movement from origin point, not current position -->
-            <!-- NOTE: +X is right, -X is left, +Y is forward, -Y is backward, +Z is up, -Z is down -->
-            <xs:enumeration value="base_link"/>
+            <!-- TODO: NOT SUPPORTED YET -->
+            <!-- <xs:enumeration value="base_link"/> -->
         </xs:restriction>
     </xs:simpleType>
 
