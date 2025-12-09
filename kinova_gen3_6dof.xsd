@@ -115,7 +115,7 @@
         <xs:attribute name="objectName" type="xs:string" use="required" />
         <xs:attribute name="objectColor" type="xs:string" use="optional" />
         <!-- distance to place the gripper from object in meters, default distance is set to be 0.05m. -->
-        <xs:attribute name="objectDistance" type="xs:float" use="optional" />
+        <xs:attribute name="objectDistance" type="xs:decimal" use="optional" />
     </xs:complexType>
 
     <!-- Simple type for end effector movement types -->
