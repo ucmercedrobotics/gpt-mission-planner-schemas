@@ -132,7 +132,7 @@
         <xs:attribute name="name" type="taskNameType" use="required" />
         <xs:attribute name="action_name" type="xs:string" use="required"
             fixed="/move_to" />
-        <xs:attribute name="movement" type="movementType" use="required"/>
+        <xs:attribute name="movement_link" type="movementType" use="required"/>
         <!-- meters in all directions -->
         <xs:attribute name="x" type="xs:decimal" use="optional"/>
         <xs:attribute name="y" type="xs:decimal" use="optional"/>
