@@ -51,6 +51,7 @@
             <xs:element name="OrientRobotHeading" type="orientRobotHeadingType" />
             <!-- <xs:element name="DetectObject" type="detectObjectType" /> -->
             <xs:element name="SampleLeaf" type="sampleLeafType" />
+            <xs:element name="FollowPerson" type="followPersonType" />
         </xs:choice>
     </xs:group>
 
@@ -135,6 +136,12 @@
         <xs:attribute name="name" type="taskNameType" use="required" />
         <xs:attribute name="action_name" type="xs:string" use="required" fixed="navigate_via_lidar" />
         <xs:attribute name="tree_angle" type="blackboardValueType" use="required" />
+    </xs:complexType>
+
+    <!-- followPerson -->
+    <xs:complexType name="followPersonType">
+        <xs:attribute name="name" type="taskNameType" use="required" />
+        <xs:attribute name="action_name" type="xs:string" use="required" fixed="follow_person" />
     </xs:complexType>
 
     <!-- TODO: enable these later -->
