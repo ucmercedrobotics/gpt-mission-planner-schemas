@@ -95,8 +95,6 @@
         <xs:attribute name="name" type="taskNameType" use="required" />
         <xs:attribute name="action_name" type="xs:string" use="required"
             fixed="follow_tree_id_waypoint" />
-        <!-- If you're visiting somewhere to take action, we'll need to know where it's at after the move. -->
-        <xs:attribute name="object_angle" type="blackboardValueType" use="optional"/>
         <xs:attribute name="id" type="xs:integer" use="required" />
         <!-- Since this will navigate to a row waypoint next to the desired tree, 
              you can choose to approach the tree or not for certain tasks like sampling -->
