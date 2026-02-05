@@ -16,17 +16,19 @@
 
     <!-- Control nodes -->
     <xs:element name="Sequence" type="BTNodeType" />
+    <xs:element name="ReactiveSequence" type="BTNodeType" />
     <xs:element name="Fallback" type="FallbackType" />
     <xs:element name="Parallel" type="BTNodeType" />
     <xs:element name="Inverter" type="BTNodeType" />
     <xs:element name="Repeat" type="BTNodeType" />
+    <xs:element name="RetryUntilSuccessful" type="RetryUntilSuccessfulType" />
 
     <!-- BehaviorTree definition -->
     <xs:element name="BehaviorTree">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element ref="Sequence" />
-            </xs:sequence>
+        <xs:sequence>
+            <xs:group ref="ControlFlowGroup"/>
+        </xs:sequence>
             <xs:attribute name="ID" type="xs:string" use="required" />
         </xs:complexType>
     </xs:element>
@@ -35,10 +37,12 @@
     <xs:group name="ControlFlowGroup">
         <xs:choice>
             <xs:element ref="Sequence" />
+            <xs:element ref="ReactiveSequence" />
             <xs:element ref="Fallback" />
             <xs:element ref="Parallel" />
             <xs:element ref="Inverter" />
             <xs:element ref="Repeat" />
+            <xs:element ref="RetryUntilSuccessful" />
         </xs:choice>
     </xs:group>
 
@@ -79,6 +83,17 @@
                 <xs:group ref="ControlFlowGroup" />
             </xs:choice>
         </xs:sequence>
+    </xs:complexType>
+
+    <!-- RetryUntilSuccessful decorator -->
+    <xs:complexType name="RetryUntilSuccessfulType">
+        <xs:sequence>
+            <xs:choice maxOccurs="unbounded" minOccurs="1">
+                <xs:group ref="ActionGroup" />
+                <xs:group ref="ControlFlowGroup" />
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="num_attempts" type="xs:integer" use="required" />
     </xs:complexType>
 
     <!-- FallbackType: sequence then decorators -->
