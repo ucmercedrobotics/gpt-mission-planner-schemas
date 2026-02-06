@@ -18,9 +18,6 @@
     <xs:element name="Sequence" type="BTNodeType" />
     <xs:element name="ReactiveSequence" type="BTNodeType" />
     <xs:element name="Fallback" type="FallbackType" />
-    <xs:element name="Parallel" type="BTNodeType" />
-    <xs:element name="Inverter" type="BTNodeType" />
-    <xs:element name="Repeat" type="BTNodeType" />
     <xs:element name="RetryUntilSuccessful" type="RetryUntilSuccessfulType" />
 
     <!-- BehaviorTree definition -->
@@ -39,9 +36,6 @@
             <xs:element ref="Sequence" />
             <xs:element ref="ReactiveSequence" />
             <xs:element ref="Fallback" />
-            <xs:element ref="Parallel" />
-            <xs:element ref="Inverter" />
-            <xs:element ref="Repeat" />
             <xs:element ref="RetryUntilSuccessful" />
         </xs:choice>
     </xs:group>
