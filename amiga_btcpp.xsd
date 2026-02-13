@@ -136,6 +136,7 @@
             fixed="rotate_in_frame" />
         <!-- True means absolute (NSEW) positioning, false means relative (left - right) positioning -->
         <xs:attribute name="absolute" type="xs:boolean" use="required" />
+        <!-- IN RADIANS -->
         <xs:attribute name="yaw" type="xs:decimal" use="required" />
     </xs:complexType>
 
