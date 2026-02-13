@@ -82,9 +82,9 @@
     <!-- RetryUntilSuccessful decorator -->
     <xs:complexType name="RetryUntilSuccessfulType">
         <xs:sequence>
-            <xs:choice maxOccurs="unbounded" minOccurs="1">
-                <xs:group ref="ActionGroup" />
-                <xs:group ref="ControlFlowGroup" />
+            <xs:choice maxOccurs="1" minOccurs="1">
+                <xs:element ref="Sequence" />
+                <xs:element ref="ReactiveSequence" />
             </xs:choice>
         </xs:sequence>
         <xs:attribute name="num_attempts" type="xs:integer" use="required" />
