@@ -124,7 +124,7 @@
     <xs:complexType name="moveToRelativeLocationType">
         <xs:attribute name="name" type="taskNameType" use="required" />
         <xs:attribute name="action_name" type="xs:string" use="required"
-            fixed="navigate_to_pose_in_frame" />
+            fixed="move_in_frame" />
         <xs:attribute name="x" type="xs:decimal" use="required" />
         <xs:attribute name="y" type="xs:decimal" use="required" />
     </xs:complexType>
@@ -133,7 +133,7 @@
     <xs:complexType name="orientRobotHeadingType">
         <xs:attribute name="name" type="taskNameType" use="required" />
         <xs:attribute name="action_name" type="xs:string" use="required"
-            fixed="navigate_to_pose_in_frame" />
+            fixed="rotate_in_frame" />
         <!-- True means absolute (NSEW) positioning, false means relative (left - right) positioning -->
         <xs:attribute name="absolute" type="xs:boolean" use="required" />
         <xs:attribute name="yaw" type="xs:decimal" use="required" />
