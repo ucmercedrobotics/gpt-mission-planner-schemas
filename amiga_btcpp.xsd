@@ -48,9 +48,10 @@
             <xs:element name="MoveToGPSLocation" type="moveToGPSLocationType" />
             <xs:element name="MoveToRelativeLocation" type="moveToRelativeLocationType" />
             <xs:element name="OrientRobotHeading" type="orientRobotHeadingType" />
-            <!-- <xs:element name="DetectObject" type="detectObjectType" /> -->
-            <xs:element name="SampleLeaf" type="sampleLeafType" />
             <xs:element name="FollowPerson" type="followPersonType" />
+            <!-- <xs:element name="DetectObject" type="detectObjectType" /> -->
+            <xs:element name="MoveArmToPosition" type="moveArmToPositionType" />
+            <xs:element name="SampleLeaf" type="sampleLeafType" />
         </xs:choice>
     </xs:group>
 
@@ -160,6 +161,32 @@
     <xs:complexType name="followPersonType">
         <xs:attribute name="name" type="taskNameType" use="required" />
         <xs:attribute name="action_name" type="xs:string" use="required" fixed="follow_person" />
+    </xs:complexType>
+
+    <!-- KINOVA ACTIONS -->
+    <!-- Simple type for end effector movement types -->
+    <xs:simpleType name="armMovementType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="end_effector_link"/>
+            <!-- TODO: NOT SUPPORTED YET -->
+            <!-- <xs:enumeration value="base_link"/> -->
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Complex type for moving to a pose -->
+    <xs:complexType name="moveArmToPositionType">
+        <xs:attribute name="name" type="taskNameType" use="required" />
+        <xs:attribute name="action_name" type="xs:string" use="required"
+            fixed="/move_to" />
+        <xs:attribute name="movement_link" type="armMovementType" use="required"/>
+        <!-- meters in all directions -->
+        <xs:attribute name="x" type="xs:decimal" use="optional"/>
+        <xs:attribute name="y" type="xs:decimal" use="optional"/>
+        <xs:attribute name="z" type="xs:decimal" use="optional"/>
+        <!-- the 3 below are in radians -->
+        <xs:attribute name="roll" type="xs:decimal" use="optional"/>
+        <xs:attribute name="pitch" type="xs:decimal" use="optional"/>
+        <xs:attribute name="yaw" type="xs:decimal" use="optional"/>
     </xs:complexType>
 
     <!-- TODO: enable these later -->
