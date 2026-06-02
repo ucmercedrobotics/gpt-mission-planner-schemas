@@ -46,6 +46,7 @@
             <xs:element name="MoveToTreeID" type="moveToTreeIDType" />
             <xs:element name="MoveToAisleHead" type="moveToAisleHeadType" />
             <xs:element name="MoveToGPSLocation" type="moveToGPSLocationType" />
+            <xs:element name="ApproachGPSWaypoint" type="approachGPSWaypointType" />
             <xs:element name="MoveToRelativeLocation" type="moveToRelativeLocationType" />
             <xs:element name="OrientRobotHeading" type="orientRobotHeadingType" />
             <xs:element name="FollowPerson" type="followPersonType" />
@@ -121,12 +122,20 @@
         <xs:attribute name="id" type="xs:integer" use="required" />
     </xs:complexType>
 
-    <!-- DEPRECATED -->
     <!-- moveToGPSLocation -->
     <xs:complexType name="moveToGPSLocationType">
         <xs:attribute name="name" type="taskNameType" use="required" />
         <xs:attribute name="action_name" type="xs:string" use="required"
             fixed="follow_gps_waypoints" />
+        <xs:attribute name="latitude" type="xs:decimal" use="required" />
+        <xs:attribute name="longitude" type="xs:decimal" use="required" />
+    </xs:complexType>
+
+    <!-- approachGPSWaypoint -->
+    <xs:complexType name="approachGPSWaypointType">
+        <xs:attribute name="name" type="taskNameType" use="required" />
+        <xs:attribute name="action_name" type="xs:string" use="required"
+            fixed="approach_gps_waypoints" />
         <xs:attribute name="latitude" type="xs:decimal" use="required" />
         <xs:attribute name="longitude" type="xs:decimal" use="required" />
     </xs:complexType>
