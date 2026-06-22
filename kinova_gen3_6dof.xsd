@@ -49,6 +49,7 @@
             <xs:element name="placeObject" type="placeObjectType"/>
             <xs:element name="identifyObject" type="identifyObjectType"/>
             <xs:element name="goToPosition" type="goToPositionType"/>
+            <xs:element name="goToHome" type="goToHomeType"/>
         </xs:choice>
     </xs:group>
 
@@ -87,24 +88,22 @@
     </xs:complexType>
 
     <!-- Leaf node types with attributes -->
-    <!-- Complex type for pickObject -->
+    <!-- Complex type for pickObject (close gripper)-->
     <xs:complexType name="pickObjectType">
         <xs:attribute name="name" type="taskNameType" use="required" />
         <xs:attribute name="action_name" type="xs:string" use="required"
-            fixed="/gripper_action" />
-        <xs:attribute name="action_type" type="xs:string" use="required"
-            fixed="close" />
-        <xs:attribute name="gripForce" type="xs:decimal" use="required" />
+            fixed="/gripper_control" />
+        <xs:attribute name="position" type="xs:decimal" use="required"
+            fixed="0.8" />
     </xs:complexType>
 
-    <!-- Complex type for placeObject -->
+    <!-- Complex type for placeObject (open gripper)-->
     <xs:complexType name="placeObjectType">
         <xs:attribute name="name" type="taskNameType" use="required" />
         <xs:attribute name="action_name" type="xs:string" use="required"
-            fixed="/gripper_action" />
-        <xs:attribute name="action_type" type="xs:string" use="required"
-            fixed="open" />
-        <xs:attribute name="releaseForce" type="xs:decimal" use="required" />
+            fixed="/gripper_control" />
+        <xs:attribute name="position" type="xs:decimal" use="required"
+            fixed="0.0" />
     </xs:complexType>
 
     <!-- Complex type for object segmentation -->
@@ -141,6 +140,19 @@
         <xs:attribute name="roll" type="xs:decimal" use="optional"/>
         <xs:attribute name="pitch" type="xs:decimal" use="optional"/>
         <xs:attribute name="yaw" type="xs:decimal" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="goToHomeType">
+        <xs:attribute name="name" type="taskNameType" use="required" />
+        <xs:attribute name="action_name" type="xs:string" use="required"
+            fixed="/move_to" />
+        <xs:attribute name="movement_link" type="movementType" use="required"/>
+        <xs:attribute name="x" type="xs:decimal" use="required" fixed="0.453493"/>
+        <xs:attribute name="y" type="xs:decimal" use="required" fixed="0.001352"/>
+        <xs:attribute name="z" type="xs:decimal" use="required" fixed="0.423332"/>
+        <xs:attribute name="roll" type="xs:decimal" use="required" fixed="1.571"/>
+        <xs:attribute name="pitch" type="xs:decimal" use="required" fixed="0.0"/>
+        <xs:attribute name="yaw" type="xs:decimal" use="required" fixed="1.571"/>
     </xs:complexType>
 
     <!-- Condition nodes -->
