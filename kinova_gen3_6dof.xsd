@@ -121,8 +121,7 @@
     <xs:simpleType name="movementType">
         <xs:restriction base="xs:string">
             <xs:enumeration value="end_effector_link"/>
-            <!-- TODO: NOT SUPPORTED YET -->
-            <!-- <xs:enumeration value="base_link"/> -->
+            <xs:enumeration value="base_link"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -146,7 +145,7 @@
         <xs:attribute name="name" type="taskNameType" use="required" />
         <xs:attribute name="action_name" type="xs:string" use="required"
             fixed="/move_to" />
-        <xs:attribute name="movement_link" type="movementType" use="required"/>
+        <xs:attribute name="movement_link" type="movementType" use="required" fixed="base_link"/>
         <xs:attribute name="x" type="xs:decimal" use="required" fixed="0.453493"/>
         <xs:attribute name="y" type="xs:decimal" use="required" fixed="0.001352"/>
         <xs:attribute name="z" type="xs:decimal" use="required" fixed="0.423332"/>
