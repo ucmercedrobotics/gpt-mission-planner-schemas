@@ -73,17 +73,7 @@
 
     <xs:attributeGroup name="taskIdentity">
         <xs:attribute name="name" type="taskNameType" use="optional" />
-        <!-- Fleet-unique while the task exists. 1..65535: this is what a
-             TASK_ANNOUNCE carries, and 0 is the wire's "no task". -->
-        <xs:attribute name="task_id" type="taskIdType" use="optional" />
     </xs:attributeGroup>
-
-    <xs:simpleType name="taskIdType">
-        <xs:restriction base="xs:integer">
-            <xs:minInclusive value="1" />
-            <xs:maxInclusive value="65535" />
-        </xs:restriction>
-    </xs:simpleType>
 
     <!-- BTNodeType: control + actions only -->
     <xs:complexType name="BTNodeType">
