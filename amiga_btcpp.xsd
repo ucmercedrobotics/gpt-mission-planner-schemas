@@ -126,6 +126,7 @@
         <xs:attribute name="name" type="taskNameType" use="required" />
         <xs:attribute name="action_name" type="xs:string" use="required"
             fixed="move_to_aisle_head" />
+        <!-- This is which row/column number you're needing to enter -->
         <xs:attribute name="id" type="xs:integer" use="required" />
     </xs:complexType>
 
