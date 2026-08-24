@@ -53,6 +53,7 @@
             <!-- <xs:element name="DetectObject" type="detectObjectType" /> -->
             <xs:element name="MoveArmToPosition" type="moveArmToPositionType" />
             <xs:element name="SampleLeaf" type="sampleLeafType" />
+            <xs:element name="Wait" type="waitType" />
         </xs:choice>
     </xs:group>
 
@@ -118,6 +119,12 @@
         <!-- Since this will navigate to a row waypoint next to the desired tree, 
              you can choose to approach the tree or not for certain tasks like sampling -->
         <xs:attribute name="approach_tree" type="xs:boolean" use="required"/>
+    </xs:complexType>
+
+    <!-- wait -->
+    <xs:complexType name="waitType">
+        <xs:attribute name="name" type="taskNameType" use="required" />
+        <xs:attribute name="seconds" type="xs:double" use="required" />
     </xs:complexType>
 
     <!-- moveToAisleHead -->
