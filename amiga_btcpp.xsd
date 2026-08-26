@@ -53,6 +53,7 @@
             <!-- <xs:element name="DetectObject" type="detectObjectType" /> -->
             <xs:element name="MoveArmToPosition" type="moveArmToPositionType" />
             <xs:element name="SampleLeaf" type="sampleLeafType" />
+            <xs:element name="HarvestFruit" type="harvestFruitType" />
             <xs:element name="Wait" type="waitType" />
         </xs:choice>
     </xs:group>
@@ -179,6 +180,12 @@
     <xs:complexType name="sampleLeafType">
         <xs:attribute name="name" type="taskNameType" use="required" />
         <xs:attribute name="action_name" type="xs:string" use="required" fixed="segment_leaves" />
+    </xs:complexType>
+
+    <!-- harvestFruit -->
+    <xs:complexType name="harvestFruitType">
+        <xs:attribute name="name" type="taskNameType" use="required" />
+        <xs:attribute name="action_name" type="xs:string" use="required" fixed="harvest_fruit" />
     </xs:complexType>
 
     <!-- followPerson -->
